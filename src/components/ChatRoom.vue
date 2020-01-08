@@ -1,15 +1,19 @@
 <template>
   <div>
-    <Enter roomName="first room"/>
+    <Enter roomName="first chatroom"/>
     <input type="text" v-model="userName"/>
     <button v-on:click="addName">登録</button>
     <ul>
       <li v-for="(item, index) in items()" v-bind:key=index>
-        {{ index+1 }} {{item.userName}} {{item.timestamp}}
-        {{ item.message }}
+        <div class="message-header">
+          {{ index+1 }} <span class="user-name">{{item.userName}}</span> {{item.timestamp}}
+        </div>
+        <div class="message-text">
+          {{ item.message }}
+        </div>
       </li>
     </ul>
-    <input type="text" v-model="newMessage"/>
+    <textarea class="message-textarea" type="text" v-model="newMessage"/>
     <button v-on:click="addMessage">送信</button>
   </div>
 </template>
@@ -59,12 +63,24 @@ ul {
   padding: 0;
 }
 li {
-  margin: 0 10px;
+  margin: 0 10px 10px;
+  background-color: #f1f1f1;
+  /* background-color: #3f3f3f; */
 }
-a {
-  color: #42b983;
-}
-input {
+.message-textarea {
+  font-size: 1.4rem;
   width: 100%;
+}
+.user-name {
+  color: blue;
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+.message-header {
+  font-size: 1.2rem;
+}
+.message-text {
+  padding: .8em;
+  font-size: 1.4rem;
 }
 </style>

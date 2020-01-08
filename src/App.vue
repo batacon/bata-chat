@@ -20,14 +20,15 @@ export default {
 
 <style>
 html {
-  background-color: #000;
+  /* background-color: #131a1a; */
 }
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #fff;
+  color: #262626;
   width: 40vw;
   min-width: 300px;
   margin: 0 auto;
