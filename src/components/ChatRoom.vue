@@ -1,20 +1,29 @@
 <template>
   <div>
     <Enter roomName="first chatroom"/>
-    <input type="text" v-model="userName"/>
-    <button v-on:click="addName">登録</button>
-    <ul>
-      <li v-for="(item, index) in items()" v-bind:key=index>
-        <div class="message-header">
-          {{ index+1 }} <span class="user-name">{{item.userName}}</span> {{item.timestamp}}
-        </div>
-        <div class="message-text">
-          {{ item.message }}
-        </div>
-      </li>
-    </ul>
-    <textarea class="message-textarea" type="text" v-model="newMessage"/>
-    <button v-on:click="addMessage">送信</button>
+    <div v-if="this.entered()">
+      <ul>
+        <li v-for="(item, index) in items()" v-bind:key=index>
+          <div class="message-header">
+            {{ index+1 }} <span class="user-name">{{item.userName}}</span> {{item.timestamp}}
+          </div>
+          <div class="message-text">
+            {{ item.message }}
+          </div>
+        </li>
+      </ul>
+      <textarea class="message-textarea" type="text" v-model="newMessage"/>
+      <button v-on:click="addMessage">送信</button>
+      <button v-on:click="leaveRoom">退出</button>
+    </div>
+    <!-- ここから下Enterに入れたい -->
+    <div v-else>
+      <p class="register-name">
+        Your name?
+        <input type="text" v-model="userName"/>
+        <button v-on:click="registerName">入室</button>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -32,6 +41,9 @@ export default {
       userName: '',
       items: function(){
         return localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : []
+      },
+      entered: function(){
+        return localStorage.getItem("entered") ? localStorage.getItem("entered") : false
       }
     }
   },
@@ -46,8 +58,15 @@ export default {
       localStorage.setItem('items', JSON.stringify(newItems))
       this.newMessage = ''
     },
-    addName: function() {
+    registerName: function() {
       localStorage.setItem('userName', this.userName)
+      localStorage.setItem('entered', true)
+      this.userName = ''
+    },
+    leaveRoom: function() {
+      localStorage.removeItem('userName')
+      localStorage.removeItem('entered')
+      location.reload() // DOM更新でできないか？
     }
   }
 }
@@ -82,5 +101,8 @@ li {
 .message-text {
   padding: .8em;
   font-size: 1.4rem;
+}
+.register-name {
+  text-align: center;
 }
 </style>

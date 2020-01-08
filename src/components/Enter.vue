@@ -2,7 +2,7 @@
   <div class="entrance">
     <h1>{{ roomName }}</h1>
     <p>
-      this is Entrance of ChatRoom
+      Welcome to ChatRoom
     </p>
   </div>
 </template>
