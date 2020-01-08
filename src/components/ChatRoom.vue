@@ -1,9 +1,12 @@
 <template>
   <div>
     <Enter roomName="first room"/>
+    <input type="text" v-model="userName"/>
+    <button v-on:click="addName">登録</button>
     <ul>
-      <li v-for="(message, index) in messages()" v-bind:key=index>
-        {{ message }}
+      <li v-for="(item, index) in items()" v-bind:key=index>
+        {{ index+1 }} {{item.userName}} {{item.timestamp}}
+        {{ item.message }}
       </li>
     </ul>
     <input type="text" v-model="newMessage"/>
@@ -22,7 +25,8 @@ export default {
   data: function() {
     return {
       newMessage: '',
-      messages: function(){
+      userName: '',
+      items: function(){
         return localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : []
       }
     }
@@ -30,13 +34,16 @@ export default {
   props: {
     // roomName: String,
     // roomMember: Array,
-    // userName: String
   },
   methods: {
     addMessage: function() {
-      const newMessages = this.messages()
-      newMessages.push(this.newMessage)
-      localStorage.setItem('items', JSON.stringify(newMessages))
+      const newItems = this.items()
+      newItems.push({userName: localStorage.getItem('userName'), message: this.newMessage, timestamp: new Date().toLocaleString('ja-JP')})
+      localStorage.setItem('items', JSON.stringify(newItems))
+      this.newMessage = ''
+    },
+    addName: function() {
+      localStorage.setItem('userName', this.userName)
     }
   }
 }
