@@ -4,6 +4,7 @@
     <p>
       Welcome to ChatRoom
     </p>
+    
   </div>
 </template>
 

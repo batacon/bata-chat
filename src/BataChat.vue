@@ -1,10 +1,7 @@
 <template>
-  <div id="app">
-    <div class='logo'>
-      <img alt="Vue logo" src="./assets/logo.png">
-    </div>
-    <ChatRoom roomName="ChatRoom"/>
-  </div>
+  <!-- v-if -->
+  <ChatRoom/>
+  <!--v-else entrance -->
 </template>
 
 <script>

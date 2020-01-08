@@ -1,9 +1,11 @@
 <template>
   <div>
     <Enter roomName="first chatroom"/>
-    <div v-if="this.entered()">
+    <!-- enteredの判定は親に任せる -->
+    <div v-if="this.entered">
+      <!-- メッセージリストコンポーネント -->
       <ul>
-        <li v-for="(item, index) in items()" v-bind:key=index>
+        <li v-for="(item, index) in items" v-bind:key=index>
           <div class="message-header">
             {{ index+1 }} <span class="user-name">{{item.userName}}</span> {{item.timestamp}}
           </div>
@@ -12,8 +14,11 @@
           </div>
         </li>
       </ul>
-      <textarea class="message-textarea" type="text" v-model="newMessage"/>
+      <!-- メッセージリストコンポーネント -->
+      <!-- 入力フォームコンポーネント -->
+      <textarea class="message-textarea" type="text" v-model="message"/>
       <button v-on:click="addMessage">送信</button>
+      <!-- 入力フォームコンポーネント -->
       <button v-on:click="leaveRoom">退出</button>
     </div>
     <!-- ここから下Enterに入れたい -->
@@ -21,7 +26,7 @@
       <p class="register-name">
         Your name?
         <input type="text" v-model="userName"/>
-        <button v-on:click="registerName">入室</button>
+        <button v-on:click="enterRoom">入室</button>
       </p>
     </div>
   </div>
@@ -37,15 +42,15 @@ export default {
   },
   data: function() {
     return {
-      newMessage: '',
+      message: '',
       userName: '',
-      items: function(){
-        return localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : []
-      },
-      entered: function(){
-        return localStorage.getItem("entered") ? localStorage.getItem("entered") : false
-      }
+      entered: false,
     }
+  },
+  computed: {
+    items: function(){
+      return localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : []
+    },
   },
   props: {
     // roomName: String,
@@ -53,27 +58,25 @@ export default {
   },
   methods: {
     addMessage: function() {
-      const newItems = this.items()
-      newItems.push({userName: localStorage.getItem('userName'), message: this.newMessage, timestamp: new Date().toLocaleString('ja-JP')})
-      localStorage.setItem('items', JSON.stringify(newItems))
-      this.newMessage = ''
+      const items = this.items
+      items.push({userName: this.userName, message: this.message, timestamp: new Date().toLocaleString('ja-JP')})
+      localStorage.setItem('items', JSON.stringify(items))
+      this.message = ''
     },
-    registerName: function() {
-      localStorage.setItem('userName', this.userName)
-      localStorage.setItem('entered', true)
-      this.userName = ''
+    enterRoom: function() {
+      this.entered = true
     },
     leaveRoom: function() {
-      localStorage.removeItem('userName')
-      localStorage.removeItem('entered')
-      location.reload() // DOM更新でできないか？
-    }
+      this.userName = ''
+      this.entered = false
+    },
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+/* TODO: 自分のメッセージの色を変える */
 h3 {
   margin: 40px 0 0;
 }
