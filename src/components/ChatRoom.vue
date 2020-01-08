@@ -1,13 +1,13 @@
 <template>
   <div>
     <Enter roomName="first room"/>
-    <input type="text" v-model="newMessage">
-    <button v-on:click="addMessage">送信</button>
     <ul>
-      <li v-for="(item, index) in items" v-bind:key=index>
-        {{ item.message }}
+      <li v-for="(message, index) in messages()" v-bind:key=index>
+        {{ message }}
       </li>
     </ul>
+    <input type="text" v-model="newMessage"/>
+    <button v-on:click="addMessage">送信</button>
   </div>
 </template>
 
@@ -22,8 +22,8 @@ export default {
   data: function() {
     return {
       newMessage: '',
-      items: function(){
-        return JSON.parse(localStorage.getItem("items"))
+      messages: function(){
+        return localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : []
       }
     }
   },
@@ -32,26 +32,11 @@ export default {
     // roomMember: Array,
     // userName: String
   },
-  // data: function() {
-  //   return {
-  //     newMessage: 'aaa'
-  //   }
-  // },
   methods: {
     addMessage: function() {
-      let item = {
-        // user: this.props.user,
-        message: this.newMessage
-      }
-      // this.props.items.push(item)
-      // if (this.props.items) {
-        console.log(this.items())
-        const newItems = this.items().push(item)
-        localStorage.setItem('items', {items: newItems})
-        // localStorage.setItem('items', JSON.stringify({message: "testtest"}))
-      // } else {
-      localStorage.setItem('items', [{"message": this.newMessage}])
-      // }
+      const newMessages = this.messages()
+      newMessages.push(this.newMessage)
+      localStorage.setItem('items', JSON.stringify(newMessages))
     }
   }
 }
@@ -67,10 +52,12 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
   margin: 0 10px;
 }
 a {
   color: #42b983;
+}
+input {
+  width: 100%;
 }
 </style>

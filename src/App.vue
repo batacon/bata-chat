@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <div class='logo'>
+      <img alt="Vue logo" src="./assets/logo.png">
+    </div>
     <ChatRoom roomName="ChatRoom"/>
   </div>
 </template>
@@ -25,7 +27,13 @@ html {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #fff;
+  width: 40vw;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+.logo {
+  text-align: center;
 }
 </style>

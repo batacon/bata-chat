@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="entrance">
     <h1>{{ roomName }}</h1>
     <p>
       this is Entrance of ChatRoom
@@ -19,6 +19,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.entrance {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
 h3 {
   margin: 40px 0 0;
 }
