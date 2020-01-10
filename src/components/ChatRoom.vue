@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Enter roomName="first chatroom"/>
+    <Entrance roomName="first chatroom"/>
     <!-- enteredの判定は親に任せる -->
     <div v-if="this.entered">
       <!-- メッセージリストコンポーネント -->
@@ -21,7 +21,7 @@
       <!-- 入力フォームコンポーネント -->
       <button v-on:click="leaveRoom">退出</button>
     </div>
-    <!-- ここから下Enterに入れたい -->
+    <!-- ここから下Entranceに入れたい -->
     <div v-else>
       <p class="register-name">
         Your name?
@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import Enter from './Enter.vue'
+import Entrance from './Entrance.vue'
 
 export default {
   name: 'ChatRoom',
   components: {
-    Enter,
+    Entrance,
   },
   data: function() {
     return {
