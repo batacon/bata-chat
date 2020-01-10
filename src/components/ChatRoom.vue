@@ -1,50 +1,33 @@
 <template>
   <div>
-    <Entrance roomName="first chatroom"/>
-    <!-- enteredの判定は親に任せる -->
-    <div v-if="this.entered">
-      <!-- メッセージリストコンポーネント -->
-      <ul>
-        <li v-for="(item, index) in items" v-bind:key=index>
-          <div class="message-header">
-            {{ index+1 }} <span class="user-name">{{item.userName}}</span> {{item.timestamp}}
-          </div>
-          <div class="message-text">
-            {{ item.message }}
-          </div>
-        </li>
-      </ul>
-      <!-- メッセージリストコンポーネント -->
-      <!-- 入力フォームコンポーネント -->
-      <textarea class="message-textarea" type="text" v-model="message"/>
-      <button v-on:click="addMessage">送信</button>
-      <!-- 入力フォームコンポーネント -->
-      <button v-on:click="leaveRoom">退出</button>
-    </div>
-    <!-- ここから下Entranceに入れたい -->
-    <div v-else>
-      <p class="register-name">
-        Your name?
-        <input type="text" v-model="userName"/>
-        <button v-on:click="enterRoom">入室</button>
-      </p>
-    </div>
+    <!-- メッセージリストコンポーネント -->
+    <ul>
+      <li v-for="(item, index) in items" v-bind:key=index>
+        <div class="message-header">
+          {{ index+1 }} <span class="user-name">{{item.userName}}</span> {{item.timestamp}}
+        </div>
+        <div class="message-text">
+          {{ item.message }}
+        </div>
+      </li>
+    </ul>
+    <!-- メッセージリストコンポーネント -->
+    <!-- 入力フォームコンポーネント -->
+    <textarea class="message-textarea" type="text" v-model="message"/>
+    <button v-on:click="addMessage">送信</button>
+    <!-- 入力フォームコンポーネント -->
+    <button v-on:click="$emit('leaveRoom')">退出</button>
   </div>
 </template>
 
 <script>
-import Entrance from './Entrance.vue'
-
 export default {
   name: 'ChatRoom',
-  components: {
-    Entrance,
-  },
   data: function() {
     return {
       message: '',
       userName: '',
-      entered: false,
+      // entered: false,
     }
   },
   computed: {
@@ -63,13 +46,7 @@ export default {
       localStorage.setItem('items', JSON.stringify(items))
       this.message = ''
     },
-    enterRoom: function() {
-      this.entered = true
-    },
-    leaveRoom: function() {
-      this.userName = ''
-      this.entered = false
-    },
+
   }
 }
 </script>

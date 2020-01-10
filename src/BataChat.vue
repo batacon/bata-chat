@@ -1,16 +1,34 @@
 <template>
-  <!-- v-if -->
-  <ChatRoom/>
-  <!--v-else entrance -->
+  <div>
+    <ChatRoom v-if="this.entered" @leaveRoom="leaveRoom"/>
+    <Entrance v-else @enterRoom="enterRoom"/>
+  </div>
 </template>
 
 <script>
 import ChatRoom from './components/ChatRoom.vue'
+import Entrance from './components/Entrance.vue'
 
 export default {
   name: 'app',
   components: {
     ChatRoom,
+    Entrance
+  },
+  data: function() {
+    return {
+      entered: false
+    }
+  },
+  methods: {
+    enterRoom: function() {
+      console.log('enter!')
+      this.entered = true
+    },
+    leaveRoom: function() {
+      this.userName = ''
+      this.entered = false
+    },
   }
 }
 </script>

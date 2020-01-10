@@ -4,17 +4,22 @@
     <p>
       Welcome to ChatRoom
     </p>
-    
+    <p class="register-name">
+      Your name?
+      <!-- <input type="text" v-model="userName"/>userNameの扱い？ -->
+      <input type="text"/>
+      <button @click="$emit('enterRoom')">入室</button>
+    </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Enter',
+  name: 'Entrance',
   props: {
     roomName: String,
-    roomMember: Array
-  }
+    // roomMember: Array
+  },
 }
 </script>
 
