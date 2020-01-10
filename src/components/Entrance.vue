@@ -7,7 +7,6 @@
     <p class="register-name">
       Your name?
       <input type="text" ref="userName"/>
-      <!-- <input type="text"/> -->
       <button @click="$emit('enterRoom', $refs.userName.value)">入室</button>
     </p>
   </div>
@@ -18,7 +17,6 @@ export default {
   name: 'Entrance',
   props: {
     roomName: String,
-    // roomMember: Array
   },
 }
 </script>

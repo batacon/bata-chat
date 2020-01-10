@@ -23,7 +23,6 @@ export default {
   },
   methods: {
     enterRoom: function(userName) {
-      console.log('enter!')
       this.entered = true
       this.userName = userName
     },
