@@ -15,18 +15,18 @@ export default {
     ChatRoom,
     Entrance
   },
-  data: function() {
+  data() {
     return {
       entered: false,
       userName: '',
     }
   },
   methods: {
-    enterRoom: function(userName) {
+    enterRoom(userName) {
       this.entered = true
       this.userName = userName
     },
-    leaveRoom: function() {
+    leaveRoom() {
       this.userName = ''
       this.entered = false
     },

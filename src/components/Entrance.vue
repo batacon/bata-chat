@@ -6,8 +6,8 @@
     </p>
     <p class="register-name">
       Your name?
-      <input type="text" ref="userName"/>
-      <button @click="$emit('enterRoom', $refs.userName.value)">入室</button>
+      <input type="text" v-model="userName"/>
+      <button @click="enterRoom">入室</button>
     </p>
   </div>
 </template>
@@ -18,6 +18,17 @@ export default {
   props: {
     roomName: String,
   },
+  data(){
+    return {
+      userName: ''
+    }
+  },
+  methods: {
+    enterRoom(){
+      const userName = this.userName ? this.userName : undefined
+      this.$emit('enterRoom', userName)
+    }
+  }
 }
 </script>
 

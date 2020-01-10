@@ -1,18 +1,8 @@
 <template>
   <div>
-    <!-- メッセージリストコンポーネント -->
-    <ul>
-      <li v-for="(item, index) in items" v-bind:key=index>
-        <div class="message-header">
-          {{ index+1 }} <span class="user-name">{{item.userName}}</span> {{item.timestamp}}
-        </div>
-        <div class="message-text">
-          {{ item.message }}
-        </div>
-      </li>
-    </ul>
-    <!-- メッセージリストコンポーネント -->
+    <MessagesList :chats="chats"/>
     <!-- 入力フォームコンポーネント -->
+    <!-- v-on:inputでmessageをupdateする親のメソッドを走らせる -->
     <textarea class="message-textarea" type="text" v-model="message"/>
     <button v-on:click="addMessage">送信</button>
     <!-- 入力フォームコンポーネント -->
@@ -21,30 +11,39 @@
 </template>
 
 <script>
+import MessagesList from './ChatRoom/MessagesList.vue'
+
 export default {
   name: 'ChatRoom',
-  data: function() {
+  components: {
+    MessagesList
+  },
+  data() {
     return {
       message: '',
+      chats: []
     }
   },
-  computed: {
-    items: function(){
-      return localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : []
+  watch: {
+    chats(){
+      localStorage.setItem('chats', JSON.stringify(this.chats))
     },
   },
   props: {
-      userName: String,
+    userName: {
+      tyep: String,
+      default: '名無しさん'
+    }
     // roomMember: Array,
   },
   methods: {
-    addMessage: function() {
-      const items = this.items
-      items.push({userName: this.userName, message: this.message, timestamp: new Date().toLocaleString('ja-JP')})
-      localStorage.setItem('items', JSON.stringify(items))
+    addMessage() {
+      this.chats.push({userName: this.userName, message: this.message, timestamp: new Date().toLocaleString('ja-JP')})
       this.message = ''
     },
-
+  },
+  created(){
+    this.chats = localStorage.getItem("chats") ? JSON.parse(localStorage.getItem("chats")) : []
   }
 }
 </script>
@@ -55,32 +54,12 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  margin: 0 10px 10px;
-  background-color: #f1f1f1;
-  /* background-color: #3f3f3f; */
+
+.register-name {
+  text-align: center;
 }
 .message-textarea {
   font-size: 1.4rem;
   width: 100%;
-}
-.user-name {
-  color: blue;
-  font-size: 1.4rem;
-  font-weight: 900;
-}
-.message-header {
-  font-size: 1.2rem;
-}
-.message-text {
-  padding: .8em;
-  font-size: 1.4rem;
-}
-.register-name {
-  text-align: center;
 }
 </style>
