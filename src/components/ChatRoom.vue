@@ -26,7 +26,6 @@ export default {
   data: function() {
     return {
       message: '',
-      userName: '',
       // entered: false,
     }
   },
@@ -36,6 +35,7 @@ export default {
     },
   },
   props: {
+      userName: String,
     // roomName: String,
     // roomMember: Array,
   },

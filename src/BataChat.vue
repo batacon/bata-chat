@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ChatRoom v-if="this.entered" @leaveRoom="leaveRoom"/>
+    <ChatRoom v-if="this.entered" :userName="userName" @leaveRoom="leaveRoom"/>
     <Entrance v-else @enterRoom="enterRoom"/>
   </div>
 </template>
@@ -17,13 +17,15 @@ export default {
   },
   data: function() {
     return {
-      entered: false
+      entered: false,
+      userName: '',
     }
   },
   methods: {
-    enterRoom: function() {
+    enterRoom: function(userName) {
       console.log('enter!')
       this.entered = true
+      this.userName = userName
     },
     leaveRoom: function() {
       this.userName = ''

@@ -6,9 +6,9 @@
     </p>
     <p class="register-name">
       Your name?
-      <!-- <input type="text" v-model="userName"/>userNameの扱い？ -->
-      <input type="text"/>
-      <button @click="$emit('enterRoom')">入室</button>
+      <input type="text" ref="userName"/>
+      <!-- <input type="text"/> -->
+      <button @click="$emit('enterRoom', $refs.userName.value)">入室</button>
     </p>
   </div>
 </template>
