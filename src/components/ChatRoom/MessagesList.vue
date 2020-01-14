@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="(chat, index) in chats" v-bind:class="usersOwn(chat)" v-bind:key=index>
+    <li v-for="(chat, index) in chats" :class="{own: usersOwn(chat.userName)}" :key=index>
       <div class="message-header">
         {{ index+1 }} 名前：<span class="user-name">{{chat.userName}} @１周年</span> {{chat.timestamp}}
       </div>
@@ -24,11 +24,9 @@ export default {
       required: true
     }
   },
-  methods: {
-    usersOwn(chat) {
-      if (chat.userName === this.userName) {
-        return { own: true }
-      }
+  computed: {
+    usersOwn() {
+      return userName => userName === this.userName && userName !== "名無しさん"
     }
   }
 }

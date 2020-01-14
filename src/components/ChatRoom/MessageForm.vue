@@ -1,7 +1,7 @@
 <template>
   <div>
-    <textarea class="message-textarea" type="text" v-model="message" v-on:input="$emit('updateMessage', message)"/>
-    <button v-on:click="submitMessage">送信</button>
+    <textarea class="message-textarea" type="text" :value="message" @input="inputMessage"/>
+    <button @click='addMessage'>送信</button>
   </div>
 </template>
 
@@ -9,18 +9,18 @@
 export default {
   name: 'MessageForm',
   props: {
-    updateMessage: Function,
-    addMessage: Function
-  },
-  data(){
-    return {
-      message: ''
+    addMessage: {
+      type: Function,
+      required: true
+    },
+    message: {
+      type: String,
+      required: true
     }
   },
   methods: {
-    submitMessage(){
-      this.$emit('addMessage')
-      this.message = ''
+    inputMessage(event){
+      this.$emit('updateMessage', event.target.value)
     }
   }
 }

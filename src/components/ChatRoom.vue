@@ -2,8 +2,8 @@
   <div>
     <h2>{{roomName}}</h2>
     <MessagesList :chats="chats" :userName="userName"/>
-    <MessageForm :message="message" @updateMessage="updateMessage" @addMessage="addMessage"/>
-    <button v-on:click="$emit('leaveRoom')">退出</button>
+    <MessageForm :message="message" @updateMessage="updateMessage" :addMessage="addMessage"/>
+    <button @click="$emit('leaveRoom')">退出</button>
   </div>
 </template>
 
@@ -45,6 +45,7 @@ export default {
     },
     addMessage() {
       this.chats.push({userName: this.userName, message: this.message, timestamp: new Date().toLocaleString('ja-JP')})
+      this.message = ''
     },
   },
   created(){
