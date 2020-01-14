@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>ChatRoom</h2>
+    <h2>{{roomName}}</h2>
     <MessagesList :chats="chats" :userName="userName"/>
     <MessageForm :message="message" @updateMessage="updateMessage" @addMessage="addMessage"/>
     <button v-on:click="$emit('leaveRoom')">退出</button>
@@ -32,6 +32,10 @@ export default {
     userName: {
       type: String,
       default: '名無しさん'
+    },
+    roomName: {
+      type: String,
+      required: true
     }
     // roomMember: Array,
   },

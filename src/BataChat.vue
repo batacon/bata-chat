@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ChatRoom v-if="this.entered" :userName="userName" @leaveRoom="leaveRoom"/>
-    <Entrance v-else @enterRoom="enterRoom" roomName="ChatRoom"/>
+    <ChatRoom v-if="this.entered" :roomName="roomName" :userName="userName" @leaveRoom="leaveRoom"/>
+    <Entrance v-else @enterRoom="enterRoom" :roomName="roomName"/>
   </div>
 </template>
 
@@ -19,6 +19,7 @@ export default {
     return {
       entered: false,
       userName: '',
+      roomName: 'ChatRoom'
     }
   },
   methods: {
