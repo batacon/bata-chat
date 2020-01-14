@@ -2,7 +2,7 @@
   <ul>
     <li v-for="(chat, index) in chats" v-bind:class="usersOwn(chat)" v-bind:key=index>
       <div class="message-header">
-        {{ index+1 }} <span class="user-name">{{chat.userName}}</span> {{chat.timestamp}}
+        {{ index+1 }} 名前：<span class="user-name">{{chat.userName}} @１周年</span> {{chat.timestamp}}
       </div>
       <div class="message-text">
         {{ chat.message }}

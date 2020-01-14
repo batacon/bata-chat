@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>ChatRoom</h2>
     <MessagesList :chats="chats" :userName="userName"/>
     <MessageForm :message="message" @updateMessage="updateMessage" @addMessage="addMessage"/>
     <button v-on:click="$emit('leaveRoom')">退出</button>
@@ -60,5 +61,14 @@ h3 {
 .message-textarea {
   font-size: 1.4rem;
   width: 100%;
+}
+button {
+  margin-top: 20px;
+  transition: .2s;
+  border: solid 1px red;
+}
+button:hover {
+  background: red;
+  color: white;
 }
 </style>

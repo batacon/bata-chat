@@ -27,5 +27,26 @@ export default {
 </script>
 
 <style scoped>
+textarea {
+  width: 60vw;
+  height: inherit;
+  font-size: 1rem;
+}
+
+button {
+  display: block;
+  padding: 0.5em 2em;
+  font-size: 1rem;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .2s;
+}
+
+button:hover {
+  background: #67c5ff;
+  color: white;
+}
 
 </style>

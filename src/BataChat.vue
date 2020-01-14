@@ -1,7 +1,7 @@
 <template>
   <div>
     <ChatRoom v-if="this.entered" :userName="userName" @leaveRoom="leaveRoom"/>
-    <Entrance v-else @enterRoom="enterRoom"/>
+    <Entrance v-else @enterRoom="enterRoom" roomName="ChatRoom"/>
   </div>
 </template>
 

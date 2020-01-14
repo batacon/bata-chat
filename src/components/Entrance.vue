@@ -2,7 +2,7 @@
   <div class="entrance">
     <h1>{{ roomName }}</h1>
     <p>
-      Welcome to ChatRoom
+      Welcome to {{roomName}}
     </p>
     <p class="register-name">
       Your name?
@@ -38,19 +38,24 @@ export default {
   text-align: center;
   margin-bottom: 2em;
 }
+input {
+  margin-right: 1em;
+}
 
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
+button {
   display: inline-block;
-  margin: 0 10px;
+  font-size: 1rem;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .2s;
 }
-a {
-  color: #42b983;
+
+button:hover {
+  background: #67c5ff;
+  color: white;
 }
+
+
 </style>
