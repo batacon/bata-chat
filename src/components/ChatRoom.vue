@@ -1,22 +1,20 @@
 <template>
   <div>
     <MessagesList :chats="chats"/>
-    <!-- 入力フォームコンポーネント -->
-    <!-- v-on:inputでmessageをupdateする親のメソッドを走らせる -->
-    <textarea class="message-textarea" type="text" v-model="message"/>
-    <button v-on:click="addMessage">送信</button>
-    <!-- 入力フォームコンポーネント -->
+    <MessageForm :message="message" @updateMessage="updateMessage" @addMessage="addMessage"/>
     <button v-on:click="$emit('leaveRoom')">退出</button>
   </div>
 </template>
 
 <script>
 import MessagesList from './ChatRoom/MessagesList.vue'
+import MessageForm from './ChatRoom/MessageForm.vue'
 
 export default {
   name: 'ChatRoom',
   components: {
-    MessagesList
+    MessagesList,
+    MessageForm
   },
   data() {
     return {
@@ -31,15 +29,17 @@ export default {
   },
   props: {
     userName: {
-      tyep: String,
+      type: String,
       default: '名無しさん'
     }
     // roomMember: Array,
   },
   methods: {
+    updateMessage(message) {
+      this.message = message
+    },
     addMessage() {
       this.chats.push({userName: this.userName, message: this.message, timestamp: new Date().toLocaleString('ja-JP')})
-      this.message = ''
     },
   },
   created(){
