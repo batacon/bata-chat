@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MessagesList :chats="chats"/>
+    <MessagesList :chats="chats" :userName="userName"/>
     <MessageForm :message="message" @updateMessage="updateMessage" @addMessage="addMessage"/>
     <button v-on:click="$emit('leaveRoom')">退出</button>
   </div>
@@ -50,7 +50,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* TODO: 自分のメッセージの色を変える */
 h3 {
   margin: 40px 0 0;
 }

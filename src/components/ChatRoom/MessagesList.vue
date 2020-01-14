@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="(chat, index) in chats" v-bind:key=index>
+    <li v-for="(chat, index) in chats" v-bind:class="usersOwn(chat)" v-bind:key=index>
       <div class="message-header">
         {{ index+1 }} <span class="user-name">{{chat.userName}}</span> {{chat.timestamp}}
       </div>
@@ -18,8 +18,19 @@ export default {
     chats: {
       type: Array,
       default: () => ([])
+    },
+    userName: {
+      type: String,
+      required: true
     }
   },
+  methods: {
+    usersOwn(chat) {
+      if (chat.userName === this.userName) {
+        return { own: true }
+      }
+    }
+  }
 }
 </script>
 
@@ -45,5 +56,8 @@ li {
 .message-text {
   padding: .8em;
   font-size: 1.4rem;
+}
+.own {
+  background-color: #c2ffc0;
 }
 </style>
