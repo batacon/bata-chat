@@ -1,4 +1,4 @@
-# 
+# bata-chat
 
 ## Project setup
 ```
